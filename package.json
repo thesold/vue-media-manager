@@ -1,21 +1,15 @@
 {
-    "name": "mediamanager",
-    "version": "1.0.0",
-    "description": "A Vue.js project",
     "author": "Marco Mark <marco@silvanite.com>",
-    "private": true,
-    "scripts": {
-        "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-        "start": "npm run dev",
-        "unit": "jest --config test/unit/jest.conf.js --coverage",
-        "e2e": "node test/e2e/runner.js",
-        "test": "npm run unit && npm run e2e",
-        "build": "node build/build.js"
-    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ],
     "dependencies": {
         "vue": "^2.5.2",
         "vue-router": "^3.0.1"
     },
+    "description": "A Vue.js project",
     "devDependencies": {
         "autoprefixer": "^7.1.2",
         "babel-core": "^6.22.1",
@@ -37,8 +31,11 @@
         "file-loader": "^1.1.4",
         "friendly-errors-webpack-plugin": "^1.6.1",
         "html-webpack-plugin": "^2.30.1",
+        "husky": "^0.14.3",
         "jest": "^21.2.0",
         "jest-serializer-vue": "^0.3.0",
+        "jsonlint": "^1.6.2",
+        "lint-staged": "^6.0.0",
         "nightwatch": "^0.9.12",
         "node-notifier": "^5.1.2",
         "optimize-css-assets-webpack-plugin": "^3.2.0",
@@ -65,9 +62,16 @@
         "node": ">= 4.0.0",
         "npm": ">= 3.0.0"
     },
-    "browserslist": [
-        "> 1%",
-        "last 2 versions",
-        "not ie <= 8"
-    ]
+    "name": "mediamanager",
+    "private": true,
+    "scripts": {
+        "build": "node build/build.js",
+        "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+        "e2e": "node test/e2e/runner.js",
+        "precommit": "lint-staged",
+        "start": "npm run dev",
+        "test": "npm run unit && npm run e2e",
+        "unit": "jest --config test/unit/jest.conf.js --coverage"
+    },
+    "version": "1.0.0"
 }

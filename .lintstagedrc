@@ -4,5 +4,14 @@
     ],
     "*.vue": [
         "eslint"
+    ],
+    "*.json": [
+        "jsonlint"
+    ],
+    ".*rc": [
+        "jsonlint"
+    ],
+    "*.md": [
+        "markdownlint"
     ]
 }
