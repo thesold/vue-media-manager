@@ -13,5 +13,8 @@
     ],
     "*.md": [
         "markdownlint"
+    ],
+    "*.scss": [
+        "stylelint --syntax=scss"
     ]
 }

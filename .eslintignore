@@ -1,0 +1,7 @@
+build
+config
+dist
+node_modules
+test
+static
+tailwind.js
