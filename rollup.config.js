@@ -13,7 +13,9 @@ export default {
         'vue2-dropzone/dist/vue2Dropzone.css',
     ],
     plugins: [
-        RollupPluginVue(),
+        RollupPluginVue({
+            css: false,
+        }),
         RollupPluginBabel(),
     ],
 }
