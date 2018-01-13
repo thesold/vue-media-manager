@@ -2,7 +2,7 @@
     "author": "Marco Mark (m2de) <m2de@outlook.com>",
     "main": "dist/index.js",
     "description": "Stand-alone Vue.js Media Manager/Library",
-    "name": "vue-media-manager",
+    "name": "@thesold/vue-media-manager",
     "private": true,
     "scripts": {
         "build": "npm run rollup && npm run tailwind && npm run purge && npm version patch",
