@@ -3,7 +3,10 @@
     "main": "dist/index.js",
     "description": "Stand-alone Vue.js Media Manager/Library",
     "name": "@thesold/vue-media-manager",
-    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/thesold/vue-media-manager.git"
+    },
     "scripts": {
         "build": "npm run rollup && npm run tailwind && npm run purge && npm version patch",
         "rollup": "rollup -c",
