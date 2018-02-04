@@ -1,62 +1,53 @@
 <template>
-    <div v-if="isVisible" class="mediamanager flex flex-col h-full pin fixed overflow-auto z-30 bg-white">
-        <div class="flex-initial flex items-end">
-            <div class="flex-1 text-right p-4">
-                <span @click="toggleWindow" class="">
-                    <svg class="h-8 w-8 fill-current text-teal hover:text-teal-dark" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                </span>
-            </div>
-        </div>
-        <div class="flex-initial h-auto">
-            <vue-dropzone
-                ref="vueDropzone"
-                id="dropzone"
-                :options="dropzoneOptions"
-                @vdropzone-success="fileUploaded"
-            ></vue-dropzone>
-        </div>
-        <div class="flex-1 overflow-scroll">
-            <div class="flex flex-wrap">
-                <div 
-                    v-for="item in filteredItems" 
-                    :key="item.version" 
-                    class="w-1/3 md:w-1/4 lg:w-1/6"
-                    @click="selectItem(item)"
+    <v-layout row justify-center fill-height>
+        <v-dialog v-model="isVisible" transition="dialog-bottom-transition" fullscreen>
+            <v-toolbar fixed>
+                <v-toolbar-title>Media Manager</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn flat color="error" v-if="resources.selected" @click="deleteSelectedResource">
+                    Delete
+                </v-btn>
+                <v-btn flat color="primary"
+                    @click="returnMedia"
+                    v-if="resources.selected"
                 >
-                    <div class="rounded overflow-hidden shadow-lg m-4" :class="selectedClass(item)">
-                        <img :src="item.thumbnail_url" :alt="item.filename" class="w-full max-w-full m-0 p-0">
-                        <div class="px-4 py-2">
-                            <div class="font-bold text-md text-grey-dark overflow-hidden whitespace-no-wrap">{{ item.filename }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flex-initial m-2 p-2 text-right">
-            <button
-                @click="cancelMedia"
-                class="bg-grey-darker hover:bg-grey-darkest text-white font-bold py-4 px-6 rounded text-xl"
-                :class="{'text-black': isLoading}"
-                :disabled="this.isLoading"
-            >
-                Cancel
-            </button>
-            <button
-                v-if="resources.selected"
-                @click="deleteSelectedResource"
-                class="bg-red-dark hover:bg-red-darker text-white font-bold py-4 px-6 rounded text-xl"
-            >
-                Delete
-            </button>
-            <button 
-                @click="returnMedia"
-                v-if="resources.selected"
-                class="bg-teal hover:bg-teal-dark text-white font-bold py-4 px-6 rounded text-xl"
-            >
-                Select
-            </button>
-        </div>
-    </div>
+                    Select
+                </v-btn>
+                <v-btn icon @click="toggleWindow">
+                    <v-icon>close</v-icon>
+                </v-btn>
+            </v-toolbar>
+            <v-flex fill-height white style="margin-top: 64px;">
+                <v-card>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                    </v-card-actions>
+                    <v-container fluid grid-list-lg>
+                        <v-layout row wrap>
+                            <v-flex xs4 md3 lg2>
+                                <vue-dropzone style="height: 100%;"
+                                    ref="vueDropzone"
+                                    id="dropzone"
+                                    :options="dropzoneOptions"
+                                    @vdropzone-success="fileUploaded"
+                                ></vue-dropzone>
+                            </v-flex>
+                            <v-flex xs4 md3 lg2
+                                v-for="item in filteredItems"
+                                :key="item.version"
+                                @click="selectItem(item)"
+                            >
+                                <v-card flat tile full-width :dark="selectedClass(item)">
+                                    <img :src="item.thumbnail_url" :alt="item.filename" style="width: 100%; max-width: 100%;">
+                                    <v-card-title>{{ item.filename }}</v-card-title>
+                                </v-card>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-card>
+            </v-flex>
+        </v-dialog>
+    </v-layout>
 </template>
 
 <script>
@@ -159,6 +150,9 @@
                 get() {
                     return this.value
                 },
+                set(value) {
+                    this.value = value
+                },
             },
 
             filteredItems: {
@@ -206,12 +200,7 @@
             },
 
             selectedClass(item) {
-                const isSelected = this.resources.selected === item
-
-                return {
-                    'border-4': isSelected,
-                    'border-teal': isSelected,
-                }
+                return this.resources.selected === item
             },
 
             returnMedia() {
