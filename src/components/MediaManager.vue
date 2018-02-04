@@ -122,7 +122,7 @@
 
                 options: {
                     request: {
-                        endpoint: `https://${this.api}/resources/upload`,
+                        endpoint: `${this.api}/resources/upload`,
                     },
                 },
                 dropZone: {
@@ -130,7 +130,7 @@
                     dropActive: 'active',
                 },
                 dropzoneOptions: {
-                    url: `https://${this.api}/resources/upload`,
+                    url: `${this.api}/resources/upload`,
                 },
 
                 searchKeyword: '',
@@ -142,7 +142,7 @@
         computed: {
             apiBaseUrl: {
                 get() {
-                    return `https://${this.api}`
+                    return `${this.api}`
                 },
             },
 
