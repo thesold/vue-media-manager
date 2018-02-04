@@ -221,5 +221,4 @@
 </script>
 
 <style>
-    @import url('../../dist/style.css');
 </style>
