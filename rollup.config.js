@@ -11,11 +11,10 @@ export default {
         'axios',
         'vue2-dropzone',
         'vue2-dropzone/dist/vue2Dropzone.css',
+        'vue',
     ],
     plugins: [
-        RollupPluginVue({
-            css: false,
-        }),
+        RollupPluginVue(),
         RollupPluginBabel(),
     ],
 }

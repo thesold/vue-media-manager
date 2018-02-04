@@ -21,10 +21,10 @@
         "browser": true,
         "node": true
     },
-    "plugins": [
-        "vue"
-    ],
     "extends": [
         "airbnb-base"
+    ],
+    "plugins": [
+        "vue"
     ]
 }
