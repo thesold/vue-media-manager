@@ -34,7 +34,7 @@
                             </v-flex>
                             <v-flex xs4 md3 lg2
                                 v-for="item in filteredItems"
-                                :key="item.version"
+                                :key="item.public_id"
                                 @click="selectItem(item)"
                             >
                                 <v-card flat tile full-width :dark="selectedClass(item)">
