@@ -32,6 +32,8 @@
         "babel-cli": "^6.26.0",
         "babel-eslint": "^8.2.1",
         "babel-preset-es2015-rollup": "^3.0.0",
+        "ci-info": "^1.1.2",
+        "clean-css": "^4.1.9",
         "eslint": "^4.16.0",
         "eslint-config-airbnb-base": "^12.1.0",
         "eslint-plugin-import": "^2.8.0",
