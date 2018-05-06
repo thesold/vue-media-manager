@@ -180,7 +180,11 @@
             deleteSelectedResource() {
                 this.isLoading = true
 
-                axios.delete(`${this.apiBaseUrl}/resources/delete/${this.resources.selected.public_id}`)
+                axios.delete(`${this.apiBaseUrl}/resources/delete/${this.resources.selected.public_id}`, {
+                    data: {
+                        file: this.resources.selected,
+                    },
+                })
                     .then(() => {
                         this.isLoading = false
                         this.$set(this.resources, 'selected', null)
